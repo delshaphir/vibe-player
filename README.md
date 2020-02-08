@@ -3,7 +3,7 @@
 This app can play the ukulele, so you know it's quirky.
 
 ## Inspiration
-* ["Claire de Lune" by Harry Kalahiki"](https://open.spotify.com/track/5Ms9J0bzaA4GJGM4SSm6q2)
+* ["Claire de Lune" by Harry Kalahiki](https://open.spotify.com/track/5Ms9J0bzaA4GJGM4SSm6q2)
 
 ## Contributors
 
