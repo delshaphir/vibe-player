@@ -5,22 +5,22 @@ import java.util.Random;
 /*
  * new object
  *  Chord ch = new Chord;
- * next chord
- *  ch.next();
- * notes of the chord are represented by numbers corresponding to the major scale
- * root is the lowest seventh is the highest
- *  int ch.root
- *  int ch.third
- *  int ch.fifth
- *  int ch.seventh
+ * next chord returns list with scale degrees
+ *  int[] ch.next(int[] weights);
+ * a good starter value for weights is {50,25,17}
+ * which corresponds to playing the simplest option 50 % of the timem
+ *  the second simplest 25% of the time etc.
+ *
+ * Add Chord.SIMPLE, Chord.MEDIUM, or Chord.COMPLEX to modify weights
+ *
  */
 public class Chord {
 
-    public int root, third, fifth, seventh;
+    static final int[] SIMPLE = {10, -5, -5};
+    static final int[] MEDIUM = {-5, 10, -5};
+    static final int[] COMPLEX = {-5, -5, 10};
 
-    private int previous;
-
-    private int[] funk = {50, 25, 17};
+    public int previous = 0;
 
     private int[] streak = {0, 0, 0};
 
@@ -46,51 +46,24 @@ public class Chord {
             {0,4,2,6}
     };
 
-    public Chord(){
-        previous = 0;
-
-        root = 1;
-        third = 3;
-        fifth = 5;
-        seventh = 7;
-
-    }
-
-    //mutate chances of a chord tendency being selected
-    private void mutate(){
-        if(streak[0]  > 8) {
-            funk[0] -= 10;
-            funk[1] += 5;
-            funk[2] += 5;
-        }
-        if(streak[1] > 4) {
-            funk[0] += 3;
-            funk[1] -= 6;
-            funk[2] += 3;
-        }
-        if(streak[2] > 2) {
-            funk[0] += 1;
-            funk[1] += 1;
-            funk[2] -= 2;
-        }
-    }
+    public Chord(){}
 
     //generated the next chord
-    public void next(){
+    public int[] next(int[] weights){
 
-        Random ran = new Random();
         int chordSeed, nextTendency;
+        Random rand = new Random();
 
         //use chordSeed to select tendency
-        chordSeed = ran.nextInt(100);
+        chordSeed = rand.nextInt(100);
 
-        if(chordSeed < funk[0]) {
+        if(chordSeed < weights[0]) {
             nextTendency = 0;
         }
-        else if(chordSeed < (funk[1]+funk[0])) {
+        else if(chordSeed < (weights[1]+weights[0])) {
             nextTendency = 1;
         }
-        else if(chordSeed < (funk[2]+funk[1]+funk[0])) {
+        else if(chordSeed < (weights[2]+weights[1]+weights[0])) {
             nextTendency = 2;
         }
         else {
@@ -101,11 +74,9 @@ public class Chord {
 
         int nextChord = tendencies[previous][nextTendency];
 
-        root = notes[nextChord][0];
-        third = notes[nextChord][1];
-        fifth = notes[nextChord][2];
-        seventh = notes[nextChord][3];
 
-        mutate();
+        return notes[nextChord];
+
+
     }
 }
