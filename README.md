@@ -1,6 +1,9 @@
-# Auburn Hacks 2020
+# UkuSelfie
 
-We're going to make something. We have not decided what it is yet, but it will be quirky.
+This app can play the ukulele, so you know it's quirky.
+
+## Inspiration
+* ["Claire de Lune" by Harry Kalahiki](https://open.spotify.com/track/5Ms9J0bzaA4GJGM4SSm6q2)
 
 ## Contributors
 
