@@ -1,5 +1,6 @@
 package com.example.ukeselfie;
 
+import android.media.MediaPlayer;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -11,8 +12,11 @@ import androidx.appcompat.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
+
+    Button bt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,6 +24,19 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+
+        bt = (Button)findViewById(R.id.button);
+        final MediaPlayer mp = MediaPlayer.create(this, R.raw.trap);
+        bt.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                mp.start();
+            }
+
+        }
+        );
+
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
