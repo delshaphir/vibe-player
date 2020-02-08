@@ -1,4 +1,5 @@
 package com.example.ukeselfie;
+
 import java.util.Random;
 
 /*
@@ -15,9 +16,13 @@ import java.util.Random;
  */
 public class Chord {
 
-    int root, third, fifth, seventh;
+    public int root, third, fifth, seventh;
 
     private int previous;
+
+    private int[] funk = {50, 25, 17};
+
+    private int[] streak = {0, 0, 0};
 
     //scale degrees of the sevenc chords of a major scale
     private int[][] notes = {
@@ -41,9 +46,6 @@ public class Chord {
             {0,4,2,6}
     };
 
-    //weights applied to the random number that picks the next chord
-    private int[] weights= {50,25,17,8};
-
     public Chord(){
         previous = 0;
 
@@ -51,8 +53,29 @@ public class Chord {
         third = 3;
         fifth = 5;
         seventh = 7;
+
     }
 
+    //mutate chances of a chord tendency being selected
+    private void mutate(){
+        if(streak[0]  > 8) {
+            funk[0] -= 10;
+            funk[1] += 5;
+            funk[2] += 5;
+        }
+        if(streak[1] > 4) {
+            funk[0] += 3;
+            funk[1] -= 6;
+            funk[2] += 3;
+        }
+        if(streak[2] > 2) {
+            funk[0] += 1;
+            funk[1] += 1;
+            funk[2] -= 2;
+        }
+    }
+
+    //generated the next chord
     public void next(){
 
         Random ran = new Random();
@@ -61,10 +84,18 @@ public class Chord {
         //use chordSeed to select tendency
         chordSeed = ran.nextInt(100);
 
-        if(chordSeed < 50) { nextTendency = 0;}
-        else if(chordSeed < 75) {nextTendency = 1;}
-        else if(chordSeed < 92) { nextTendency = 2;}
-        else { nextTendency = 3;}
+        if(chordSeed < funk[0]) {
+            nextTendency = 0;
+        }
+        else if(chordSeed < (funk[1]+funk[0])) {
+            nextTendency = 1;
+        }
+        else if(chordSeed < (funk[2]+funk[1]+funk[0])) {
+            nextTendency = 2;
+        }
+        else {
+            nextTendency = 3;
+        }
 
         //select the next chord using prev and nextTendency
 
@@ -74,5 +105,7 @@ public class Chord {
         third = notes[nextChord][1];
         fifth = notes[nextChord][2];
         seventh = notes[nextChord][3];
+
+        mutate();
     }
 }
