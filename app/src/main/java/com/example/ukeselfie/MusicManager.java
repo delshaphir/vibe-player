@@ -37,6 +37,11 @@ public class MusicManager implements Runnable {
         int[] weights = {50,25,17};
         while (playing) {
             ukulelePlayer.playChords(chordLogic.next(weights));
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                Log.d("exception", e.getMessage());
+            }
         }
     }
 
