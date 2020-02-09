@@ -9,6 +9,7 @@ import com.google.android.material.snackbar.Snackbar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -43,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         final MusicPlayer player = new MusicPlayer(this);
+        final MusicManager manager = new MusicManager(this);
 
         bt = (Button)findViewById(R.id.button);
 
@@ -50,12 +52,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view){
                 //mp.start();
-                player.loadChords(rand4());
-                player.playChords();
-
-
+//                player.loadChords(rand4());
+//                player.playChords();
+                try {
+                    manager.start();
+                } catch (InterruptedException e) {
+                    Log.d("exception", e.getMessage());
+                }
             }
-
         }
         );
 
