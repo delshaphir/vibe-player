@@ -72,13 +72,12 @@ public class MainActivity extends AppCompatActivity {
                 } catch (InterruptedException e) {
                     Log.d("exception", e.getMessage());
                 }
+                if (!isAppRunning()){
+                    manager.stop();
+                }
             }
         }
         );
-
-        if (!isAppRunning()){
-            manager.stop();
-        }
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
