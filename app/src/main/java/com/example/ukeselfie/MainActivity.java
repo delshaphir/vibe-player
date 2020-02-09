@@ -72,9 +72,6 @@ public class MainActivity extends AppCompatActivity {
                 } catch (InterruptedException e) {
                     Log.d("exception", e.getMessage());
                 }
-                if (!isAppRunning()){
-                    manager.stop();
-                }
             }
         }
         );
