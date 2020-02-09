@@ -13,10 +13,27 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
+import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
 
     Button bt;
+
+    private int[] rand4(){
+        Random rand = new Random();
+
+        int upperbound = 9;
+
+        int num1 = rand.nextInt(upperbound);
+        int num2 = rand.nextInt(upperbound);
+        int num3 = rand.nextInt(upperbound);
+        int num4 = rand.nextInt(upperbound);
+
+
+        int[] ret = {num1, num2, num3, num4};
+        return ret;
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,13 +42,18 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        final MusicPlayer player = new MusicPlayer(this);
 
         bt = (Button)findViewById(R.id.button);
-        final MediaPlayer mp = MediaPlayer.create(this, R.raw.trap);
+
         bt.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
-                mp.start();
+                //mp.start();
+                player.loadChords(rand4());
+                player.playChords();
+
+
             }
 
         }
