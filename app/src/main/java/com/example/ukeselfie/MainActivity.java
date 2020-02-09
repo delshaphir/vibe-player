@@ -65,14 +65,8 @@ public class MainActivity extends AppCompatActivity {
                   @Override
                   public void onClick(View view) {
                       manThread.start();
-
-                      /*
-                      try {
-                          manager.toggle();
-                      } catch (InterruptedException e) {
-                          Log.d("exception", e.getMessage());
-                      }
-                      */
+                      playing = true;
+                      bt.setEnabled(false);
                   }
                 }
         );

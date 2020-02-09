@@ -40,7 +40,8 @@ public class MusicManager implements Runnable {
             try {
                 Thread.sleep(1500);
             } catch (InterruptedException e) {
-                Log.d("exception", e.getMessage());
+                ukulelePlayer.stop();
+                ukulelePlayer.release();
             }
         }
     }

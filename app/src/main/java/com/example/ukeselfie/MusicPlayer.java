@@ -40,10 +40,16 @@ public class MusicPlayer{
         Log.d("tag", String.valueOf(chordf));
     }
 
-    public void release(){
-        MediaPlayer np = new MediaPlayer();
-        np.release();
+    public void stop() {
+        for (MediaPlayer player: mediaPlayers) {
+            player.stop();
+        }
+    }
 
+    public void release(){
+        for (MediaPlayer player: mediaPlayers) {
+            player.release();
+        }
     }
 
 }
