@@ -49,18 +49,7 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        //final MusicPlayer player = new MusicPlayer(this);
         final MusicManager manager = new MusicManager(this);
-
-        ArrayList<Integer> ukuList = new ArrayList<Integer>(8);
-        ukuList.add(R.raw.a);
-        ukuList.add(R.raw.b);
-        ukuList.add(R.raw.c);
-        ukuList.add(R.raw.cc);
-        ukuList.add(R.raw.d);
-        ukuList.add(R.raw.e);
-        ukuList.add(R.raw.f);
-        ukuList.add(R.raw.g);
 
         bt = (Button)findViewById(R.id.button);
 

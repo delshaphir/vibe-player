@@ -17,28 +17,13 @@ public class MusicPlayer{
 
 
     //MediaPlayer[] mpList = {aNote, bNote, bbNote, cNote, dNote, eNote, ebNote, fNote, gNote};
-    ArrayList<MediaPlayer> mpList = new ArrayList<MediaPlayer>(8);
+    List<MediaPlayer> mediaPlayers = new ArrayList<MediaPlayer>();
 
     public MusicPlayer(AppCompatActivity context, List<Integer> soundList){
 
-        final MediaPlayer aNote = MediaPlayer.create(context, soundList.get(0));
-        final MediaPlayer bNote = MediaPlayer.create(context, soundList.get(1));
-        final MediaPlayer bbNote = MediaPlayer.create(context, soundList.get(2));
-        final MediaPlayer cNote = MediaPlayer.create(context, soundList.get(3));
-        final MediaPlayer dNote = MediaPlayer.create(context, soundList.get(4));
-        final MediaPlayer eNote = MediaPlayer.create(context, soundList.get(5));
-        final MediaPlayer fNote = MediaPlayer.create(context, soundList.get(6));
-        final MediaPlayer gNote = MediaPlayer.create(context, soundList.get(7));
-        //trap = MediaPlayer.create(context, R.raw.trap);
-
-        mpList.add(aNote);
-        mpList.add(bNote);
-        mpList.add(bbNote);
-        mpList.add(cNote);
-        mpList.add(dNote);
-        mpList.add(eNote);
-        mpList.add(fNote);
-        mpList.add(gNote);
+        for (Integer id: soundList) {
+            mediaPlayers.add(MediaPlayer.create(context, id));
+        }
 
     }
 
@@ -50,7 +35,7 @@ public class MusicPlayer{
     }
 
     public void playChords(int chordf){
-        mpList.get(chordf).start();
+        mediaPlayers.get(chordf).start();
     }
 
     public void release(){

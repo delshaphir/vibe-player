@@ -21,18 +21,8 @@ public class MusicManager {
      * using `Chord` and keep time.
      */
     public MusicManager(AppCompatActivity context) {
-        List<Integer> ukuList = new ArrayList<Integer>(8);
-        ukuList.add(R.raw.a);
-        ukuList.add(R.raw.b);
-        ukuList.add(R.raw.c);
-        ukuList.add(R.raw.cc);
-        ukuList.add(R.raw.d);
-        ukuList.add(R.raw.e);
-        ukuList.add(R.raw.f);
-        ukuList.add(R.raw.g);
-
         playing = true;
-        ukulelePlayer = new MusicPlayer(context, ukuList);
+        ukulelePlayer = new MusicPlayer(context, Sounds.CHORDS);
 //        drumPlayer = new MusicPlayer(context, drumList);
     }
 
