@@ -49,9 +49,10 @@ public class MusicManager {
     /// Starts keeping time
     public void start() throws InterruptedException {
         while (playing) {
-            int[] chord = randChord();
-            ukulelePlayer.loadChords(chord);
-            ukulelePlayer.playChords();
+            Chord chrd = new Chord();
+            int[] weights = {50,25,17};
+            int nextChord = chrd.next(weights);
+            ukulelePlayer.playChords(nextChord);
             Thread.sleep(1000);
         }
     }

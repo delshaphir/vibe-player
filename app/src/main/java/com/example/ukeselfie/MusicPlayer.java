@@ -43,19 +43,14 @@ public class MusicPlayer{
     }
 
     public void loadChords(int[] chords){
-
         chord1 = chords[0];
         chord2 = chords[1];
         chord3 = chords[2];
         chord4 = chords[3];
-
     }
 
-    public void playChords(){
-        mpList.get(chord1).start();
-        mpList.get(chord2).start();
-        mpList.get(chord3).start();
-        mpList.get(chord4).start();
+    public void playChords(int chordf){
+        mpList.get(chordf).start();
     }
 
     public void release(){
