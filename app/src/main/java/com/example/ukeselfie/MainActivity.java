@@ -14,7 +14,13 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
+import java.util.Iterator;
+
+import android.app.ActivityManager;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -43,8 +49,29 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        final MusicPlayer player = new MusicPlayer(this);
+        //final MusicPlayer player = new MusicPlayer(this);
         final MusicManager manager = new MusicManager(this);
+
+        ArrayList<Integer> ukuList = new ArrayList<Integer>(9);
+        ukuList.add(R.raw.a_piano);
+        ukuList.add(R.raw.b_piano);
+        ukuList.add(R.raw.bb_piano);
+        ukuList.add(R.raw.c_piano);
+        ukuList.add(R.raw.d_piano);
+        ukuList.add(R.raw.e_piano);
+        ukuList.add(R.raw.eb_piano);
+        ukuList.add(R.raw.f_piano);
+        ukuList.add(R.raw.g_piano);
+
+
+
+
+        //trap = MediaPlayer.create(context, R.raw.trap);
+
+
+
+
+        final MusicPlayer player = new MusicPlayer(this, ukuList);
 
         bt = (Button)findViewById(R.id.button);
 
@@ -58,6 +85,12 @@ public class MainActivity extends AppCompatActivity {
                     manager.start();
                 } catch (InterruptedException e) {
                     Log.d("exception", e.getMessage());
+                }
+                //player.loadChords(rand4());
+                //player.playChords();
+
+                if (isAppRunning() == false){
+                    player.release();
                 }
             }
         }
@@ -95,4 +128,23 @@ public class MainActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+
+    private boolean isAppRunning() {
+        ActivityManager m = (ActivityManager) this.getSystemService( ACTIVITY_SERVICE );
+        List<ActivityManager.RunningTaskInfo> runningTaskInfoList =  m.getRunningTasks(10);
+        Iterator<ActivityManager.RunningTaskInfo> itr = runningTaskInfoList.iterator();
+        int n=0;
+        while(itr.hasNext()){
+            n++;
+            itr.next();
+        }
+        if(n==1){ // App is killed
+            return false;
+        }
+
+        return true; // App is in background or foreground
+    }
+
 }
+

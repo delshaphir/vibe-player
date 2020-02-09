@@ -18,17 +18,17 @@ public class MusicPlayer{
     //MediaPlayer[] mpList = {aNote, bNote, bbNote, cNote, dNote, eNote, ebNote, fNote, gNote};
     ArrayList<MediaPlayer> mpList = new ArrayList<MediaPlayer>(9);
 
-    public MusicPlayer(AppCompatActivity context){
+    public MusicPlayer(AppCompatActivity context, ArrayList<Integer> soundList){
 
-        final MediaPlayer aNote = MediaPlayer.create(context, R.raw.a_piano);
-        final MediaPlayer bNote = MediaPlayer.create(context, R.raw.b_piano);
-        final MediaPlayer bbNote = MediaPlayer.create(context, R.raw.bb_piano);
-        final MediaPlayer cNote = MediaPlayer.create(context, R.raw.c_piano);
-        final MediaPlayer dNote = MediaPlayer.create(context, R.raw.d_piano);
-        final MediaPlayer eNote = MediaPlayer.create(context, R.raw.e_piano);
-        final MediaPlayer ebNote = MediaPlayer.create(context, R.raw.eb_piano);
-        final MediaPlayer fNote = MediaPlayer.create(context, R.raw.f_piano);
-        final MediaPlayer gNote = MediaPlayer.create(context, R.raw.g_piano);
+        final MediaPlayer aNote = MediaPlayer.create(context, soundList.get(0));
+        final MediaPlayer bNote = MediaPlayer.create(context, soundList.get(1));
+        final MediaPlayer bbNote = MediaPlayer.create(context, soundList.get(2));
+        final MediaPlayer cNote = MediaPlayer.create(context, soundList.get(3));
+        final MediaPlayer dNote = MediaPlayer.create(context, soundList.get(4));
+        final MediaPlayer eNote = MediaPlayer.create(context, soundList.get(5));
+        final MediaPlayer ebNote = MediaPlayer.create(context, soundList.get(6));
+        final MediaPlayer fNote = MediaPlayer.create(context, soundList.get(7));
+        final MediaPlayer gNote = MediaPlayer.create(context, soundList.get(8));
         //trap = MediaPlayer.create(context, R.raw.trap);
 
         mpList.add(aNote);
@@ -57,6 +57,12 @@ public class MusicPlayer{
         mpList.get(chord2).start();
         mpList.get(chord3).start();
         mpList.get(chord4).start();
+    }
+
+    public void release(){
+        MediaPlayer np = new MediaPlayer();
+        np.release();
+
     }
 
 }

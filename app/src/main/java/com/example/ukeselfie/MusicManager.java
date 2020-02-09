@@ -2,6 +2,7 @@ package com.example.ukeselfie;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 public class MusicManager {
@@ -19,8 +20,19 @@ public class MusicManager {
      * using `Chord` and keep time.
      */
     public MusicManager(AppCompatActivity context) {
+        ArrayList<Integer> ukuList = new ArrayList<Integer>(9);
+        ukuList.add(R.raw.a_piano);
+        ukuList.add(R.raw.b_piano);
+        ukuList.add(R.raw.bb_piano);
+        ukuList.add(R.raw.c_piano);
+        ukuList.add(R.raw.d_piano);
+        ukuList.add(R.raw.e_piano);
+        ukuList.add(R.raw.eb_piano);
+        ukuList.add(R.raw.f_piano);
+        ukuList.add(R.raw.g_piano);
+
         playing = true;
-        ukulelePlayer = new MusicPlayer(context);
+        ukulelePlayer = new MusicPlayer(context, ukuList);
 //        drumPlayer = new MusicPlayer(context);
     }
 
