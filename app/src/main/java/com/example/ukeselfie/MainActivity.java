@@ -62,39 +62,19 @@ public class MainActivity extends AppCompatActivity {
         ukuList.add(R.raw.f);
         ukuList.add(R.raw.g);
 
-
-
-
-        //trap = MediaPlayer.create(context, R.raw.trap);
-
-
-
-
-        final MusicPlayer player = new MusicPlayer(this, ukuList);
-
         bt = (Button)findViewById(R.id.button);
 
         bt.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
-                //mp.start();
-//                player.loadChords(rand4());
-//                player.playChords();
                 try {
                     manager.start();
                 } catch (InterruptedException e) {
                     Log.d("exception", e.getMessage());
                 }
-                //player.loadChords(rand4());
-                //player.playChords();
-
-                if (isAppRunning() == false){
-                    player.release();
-                }
             }
         }
         );
-
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {

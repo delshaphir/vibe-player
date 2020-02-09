@@ -6,6 +6,7 @@ import android.provider.MediaStore;
 
 import androidx.appcompat.app.AppCompatActivity;
 import java.util.ArrayList;
+import java.util.List;
 
 public class MusicPlayer{
 
@@ -18,7 +19,7 @@ public class MusicPlayer{
     //MediaPlayer[] mpList = {aNote, bNote, bbNote, cNote, dNote, eNote, ebNote, fNote, gNote};
     ArrayList<MediaPlayer> mpList = new ArrayList<MediaPlayer>(8);
 
-    public MusicPlayer(AppCompatActivity context, ArrayList<Integer> soundList){
+    public MusicPlayer(AppCompatActivity context, List<Integer> soundList){
 
         final MediaPlayer aNote = MediaPlayer.create(context, soundList.get(0));
         final MediaPlayer bNote = MediaPlayer.create(context, soundList.get(1));

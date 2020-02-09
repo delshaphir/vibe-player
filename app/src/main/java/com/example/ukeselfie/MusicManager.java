@@ -3,6 +3,7 @@ package com.example.ukeselfie;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public class MusicManager {
@@ -20,7 +21,7 @@ public class MusicManager {
      * using `Chord` and keep time.
      */
     public MusicManager(AppCompatActivity context) {
-        ArrayList<Integer> ukuList = new ArrayList<Integer>(8);
+        List<Integer> ukuList = new ArrayList<Integer>(8);
         ukuList.add(R.raw.a);
         ukuList.add(R.raw.b);
         ukuList.add(R.raw.c);
@@ -32,7 +33,7 @@ public class MusicManager {
 
         playing = true;
         ukulelePlayer = new MusicPlayer(context, ukuList);
-//        drumPlayer = new MusicPlayer(context);
+//        drumPlayer = new MusicPlayer(context, drumList);
     }
 
     /// Generates a random chord (for testing purposes)
@@ -56,6 +57,8 @@ public class MusicManager {
     }
 
     public void stop() {
+        ukulelePlayer.release();
+        // drumPlayer.release();
         playing = false;
     }
 
