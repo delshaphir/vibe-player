@@ -23,17 +23,6 @@ public class Chord {
 
     public int previous = 0;
 
-    //scale degrees of the sevenc chords of a major scale
-    private int[][] notes = {
-            {1,3,5,7},
-            {2,4,6,8},
-            {3,5,7,9},
-            {4,6,8,10},
-            {5,7,9,11},
-            {6,8,10,12},
-            {7,9,11,13}
-    };
-
     //tendencies to go to different chords based of the starting chord ranked in order of safety
     private int[][] tendencies = {
             {4,2,5,6},
@@ -48,7 +37,7 @@ public class Chord {
     public Chord(){}
 
     //generated the next chord
-    public int[] next(int[] weights){
+    public int next(int[] weights){
 
         int chordSeed, nextTendency;
         Random rand = new Random();
@@ -75,7 +64,7 @@ public class Chord {
 
         previous = nextChord;
 
-        return notes[nextChord];
+        return nextChord;
 
 
     }
