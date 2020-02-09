@@ -13,6 +13,7 @@ import com.google.android.material.snackbar.Snackbar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.view.Menu;
@@ -37,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
     Button bt;
     //for CameraIntent
     private int PICK_IMAGE_REQUEST = 1;
+    static final int REQUEST_IMAGE_CAPTURE = 1;
 
     //setUp for tensorflow
     public static final int INPUT_SIZE = 224;
@@ -70,6 +72,9 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        final MediaPlayer fight = MediaPlayer.create(this, R.raw.fightsong);
+        final MediaPlayer kickSix = MediaPlayer.create(this,R.raw.kicksix);
+        final MediaPlayer whoops = MediaPlayer.create(this, R.raw.whoops);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -88,28 +93,8 @@ public class MainActivity extends AppCompatActivity {
         ukuList.add(R.raw.f);
         ukuList.add(R.raw.g);
 
-        bt = (Button)findViewById(R.id.button);
 
-        bt.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view){
-                try {
-                    manager.start();
-                } catch (InterruptedException e) {
-                    Log.d("exception", e.getMessage());
-                }
-            }
-        }
-        );
 
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
         TV1 = (TextView) findViewById(R.id.textView1);
         iV1 = (ImageView) findViewById(R.id.imageView1);
         initTensorFlowAndLoadModel();
@@ -187,7 +172,20 @@ public class MainActivity extends AppCompatActivity {
         Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
         photoPickerIntent.setType("image/*");
         startActivityForResult(photoPickerIntent, PICK_IMAGE_REQUEST);
+
     }
+
+    public void takePicture(View v)
+    {
+        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        takePictureIntent.setType("image/*");
+        Log.d("takePic",takePictureIntent.toString());
+        if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+            startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+        }
+    }
+
+
 
     @Override
     protected void onActivityResult(int reqCode, int resultCode, Intent data) {
@@ -200,7 +198,18 @@ public class MainActivity extends AppCompatActivity {
                 final Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
                 List<Classifier.Recognition> results = analyse(selectedImage);
                 TV1.setText(results.get(0).toString());
+                int imType = Integer.parseInt(results.get(0).toString().substring(1,2));
+                if (imType == 0) {
+                    TV1.setText("Oh no it's Big Al!");
+                } else if (imType == 1) {
+                    TV1.setText("Hey it's Aubie! War Eagle!");
+                } else if (imType == 2) {
+                    TV1.setText("That's a tiger, but it's not Aubie!");
+                } else if (imType == 3) {
+                    TV1.setText("I don't see a mascot in this picture!");
+                }
                 Log.d("results", results.get(0).toString().substring(0,3));
+
                 setPicture(selectedImage);
 
 
