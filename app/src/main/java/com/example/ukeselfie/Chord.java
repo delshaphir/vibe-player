@@ -60,9 +60,9 @@ public class Chord {
 
         //select the next chord using prev and nextTendency
 
-        int nextChord = tendencies[previous][nextTendency];
+        int nextChord = 3 * tendencies[previous][nextTendency] + rand.nextInt(3);
 
-        previous = nextChord;
+        previous = (nextChord - 3) / 7;
 
         return nextChord;
 

@@ -20,10 +20,17 @@ public class MusicPlayer{
     //MediaPlayer[] mpList = {aNote, bNote, bbNote, cNote, dNote, eNote, ebNote, fNote, gNote};
     List<MediaPlayer> mediaPlayers = new ArrayList<MediaPlayer>();
 
-    public MusicPlayer(AppCompatActivity context, List<Integer> soundList){
+    public MusicPlayer(AppCompatActivity context, List<int[]> soundList){
 
-        for (Integer id: soundList) {
-            mediaPlayers.add(MediaPlayer.create(context, id));
+        for (int[] x: soundList) {
+            //MediaPlayer temp = new MediaPlayer(context, x[0]);
+
+            mediaPlayers.add(MediaPlayer.create(context, x[0]));
+            mediaPlayers.add(MediaPlayer.create(context, x[1]));
+            mediaPlayers.add(MediaPlayer.create(context, x[2]));
+            //for (Integer id : x) {
+            //    mediaPlayers.add(MediaPlayer.create(context, id));
+            //}
         }
 
     }
@@ -52,4 +59,14 @@ public class MusicPlayer{
         }
     }
 
+
+    private class MelodiePicker {
+
+
+
+
+    }
+
 }
+
+

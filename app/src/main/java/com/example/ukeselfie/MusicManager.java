@@ -29,7 +29,7 @@ public class MusicManager implements Runnable {
         chordLogic = new Chord();
         running = false;
         playing = false;
-        ukulelePlayer = new MusicPlayer(context, Sounds.CHORDS);
+        ukulelePlayer = new MusicPlayer(context, Sounds.MELODIES);
 //        drumPlayer = new MusicPlayer(context, drumList);
     }
 
@@ -43,7 +43,7 @@ public class MusicManager implements Runnable {
                 ukulelePlayer.playChords(chordLogic.next(weights));
             }
             try {
-                Thread.sleep(1500);
+                Thread.sleep(8500);
             } catch (InterruptedException e) {
                 ukulelePlayer.release();
             }
