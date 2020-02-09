@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
     private int[] rand4(){
         Random rand = new Random();
 
-        int upperbound = 9;
+        int upperbound = 8;
 
         int num1 = rand.nextInt(upperbound);
         int num2 = rand.nextInt(upperbound);
@@ -52,16 +52,15 @@ public class MainActivity extends AppCompatActivity {
         //final MusicPlayer player = new MusicPlayer(this);
         final MusicManager manager = new MusicManager(this);
 
-        ArrayList<Integer> ukuList = new ArrayList<Integer>(9);
-        ukuList.add(R.raw.a_piano);
-        ukuList.add(R.raw.b_piano);
-        ukuList.add(R.raw.bb_piano);
-        ukuList.add(R.raw.c_piano);
-        ukuList.add(R.raw.d_piano);
-        ukuList.add(R.raw.e_piano);
-        ukuList.add(R.raw.eb_piano);
-        ukuList.add(R.raw.f_piano);
-        ukuList.add(R.raw.g_piano);
+        ArrayList<Integer> ukuList = new ArrayList<Integer>(8);
+        ukuList.add(R.raw.a);
+        ukuList.add(R.raw.b);
+        ukuList.add(R.raw.c);
+        ukuList.add(R.raw.cc);
+        ukuList.add(R.raw.d);
+        ukuList.add(R.raw.e);
+        ukuList.add(R.raw.f);
+        ukuList.add(R.raw.g);
 
 
 

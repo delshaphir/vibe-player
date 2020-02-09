@@ -20,16 +20,15 @@ public class MusicManager {
      * using `Chord` and keep time.
      */
     public MusicManager(AppCompatActivity context) {
-        ArrayList<Integer> ukuList = new ArrayList<Integer>(9);
-        ukuList.add(R.raw.a_piano);
-        ukuList.add(R.raw.b_piano);
-        ukuList.add(R.raw.bb_piano);
-        ukuList.add(R.raw.c_piano);
-        ukuList.add(R.raw.d_piano);
-        ukuList.add(R.raw.e_piano);
-        ukuList.add(R.raw.eb_piano);
-        ukuList.add(R.raw.f_piano);
-        ukuList.add(R.raw.g_piano);
+        ArrayList<Integer> ukuList = new ArrayList<Integer>(8);
+        ukuList.add(R.raw.a);
+        ukuList.add(R.raw.b);
+        ukuList.add(R.raw.c);
+        ukuList.add(R.raw.cc);
+        ukuList.add(R.raw.d);
+        ukuList.add(R.raw.e);
+        ukuList.add(R.raw.f);
+        ukuList.add(R.raw.g);
 
         playing = true;
         ukulelePlayer = new MusicPlayer(context, ukuList);
@@ -41,7 +40,7 @@ public class MusicManager {
         Random rand = new Random();
         int[] chord = new int[4];
         for (int i = 0; i < chord.length; i++) {
-            chord[i] = rand.nextInt(9);
+            chord[i] = rand.nextInt(8);
         }
         return chord;
     }

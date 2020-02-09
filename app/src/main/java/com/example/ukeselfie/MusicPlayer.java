@@ -16,7 +16,7 @@ public class MusicPlayer{
 
 
     //MediaPlayer[] mpList = {aNote, bNote, bbNote, cNote, dNote, eNote, ebNote, fNote, gNote};
-    ArrayList<MediaPlayer> mpList = new ArrayList<MediaPlayer>(9);
+    ArrayList<MediaPlayer> mpList = new ArrayList<MediaPlayer>(8);
 
     public MusicPlayer(AppCompatActivity context, ArrayList<Integer> soundList){
 
@@ -26,9 +26,8 @@ public class MusicPlayer{
         final MediaPlayer cNote = MediaPlayer.create(context, soundList.get(3));
         final MediaPlayer dNote = MediaPlayer.create(context, soundList.get(4));
         final MediaPlayer eNote = MediaPlayer.create(context, soundList.get(5));
-        final MediaPlayer ebNote = MediaPlayer.create(context, soundList.get(6));
-        final MediaPlayer fNote = MediaPlayer.create(context, soundList.get(7));
-        final MediaPlayer gNote = MediaPlayer.create(context, soundList.get(8));
+        final MediaPlayer fNote = MediaPlayer.create(context, soundList.get(6));
+        final MediaPlayer gNote = MediaPlayer.create(context, soundList.get(7));
         //trap = MediaPlayer.create(context, R.raw.trap);
 
         mpList.add(aNote);
@@ -37,7 +36,6 @@ public class MusicPlayer{
         mpList.add(cNote);
         mpList.add(dNote);
         mpList.add(eNote);
-        mpList.add(ebNote);
         mpList.add(fNote);
         mpList.add(gNote);
 
