@@ -28,8 +28,9 @@ import android.app.ActivityManager;
 public class MainActivity extends AppCompatActivity {
 
     MusicManager manager;
-    Button bt;
+    Button bt, stopBtn;
     boolean playing = false;
+    boolean threadStarted = false;
     Clock clock;
 
     private int[] rand4(){
@@ -41,7 +42,6 @@ public class MainActivity extends AppCompatActivity {
         int num2 = rand.nextInt(upperbound);
         int num3 = rand.nextInt(upperbound);
         int num4 = rand.nextInt(upperbound);
-
 
         int[] ret = {num1, num2, num3, num4};
         return ret;
@@ -56,7 +56,9 @@ public class MainActivity extends AppCompatActivity {
 
         manager = new MusicManager(this);
 
-        bt = (Button)findViewById(R.id.button);
+        bt = (Button) findViewById(R.id.button);
+        stopBtn = (Button) findViewById(R.id.stopBtn);
+        stopBtn.setEnabled(false);
 
         final Thread manThread = new Thread(manager);
 
@@ -64,10 +66,27 @@ public class MainActivity extends AppCompatActivity {
                 new View.OnClickListener(){
                   @Override
                   public void onClick(View view) {
-                      manThread.start();
+                      if (!threadStarted) {
+                          manThread.start();
+                          threadStarted = true;
+                      } else {
+                          manager.start();
+                      }
                       playing = true;
                       bt.setEnabled(false);
+                      stopBtn.setEnabled(true);
                   }
+                }
+        );
+        stopBtn.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        playing = false;
+                        manager.stop();
+                        bt.setEnabled(true);
+                        stopBtn.setEnabled(false);
+                    }
                 }
         );
 

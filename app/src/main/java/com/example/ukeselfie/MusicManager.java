@@ -10,6 +10,7 @@ import android.util.Log;
 
 public class MusicManager implements Runnable {
 
+    private boolean running;
     private boolean playing;
 
     private double interval;
@@ -26,6 +27,7 @@ public class MusicManager implements Runnable {
      */
     public MusicManager(AppCompatActivity context) {
         chordLogic = new Chord();
+        running = false;
         playing = false;
         ukulelePlayer = new MusicPlayer(context, Sounds.CHORDS);
 //        drumPlayer = new MusicPlayer(context, drumList);
@@ -33,14 +35,16 @@ public class MusicManager implements Runnable {
 
     @Override
     public void run() {
+        running = true;
         playing = true;
         int[] weights = {50,25,17};
-        while (playing) {
-            ukulelePlayer.playChords(chordLogic.next(weights));
+        while (running) {
+            if (playing) {
+                ukulelePlayer.playChords(chordLogic.next(weights));
+            }
             try {
                 Thread.sleep(1500);
             } catch (InterruptedException e) {
-                ukulelePlayer.stop();
                 ukulelePlayer.release();
             }
         }
@@ -57,18 +61,13 @@ public class MusicManager implements Runnable {
     }
 
     /// Starts keeping time
-    public void start() throws InterruptedException {
+    public void start() {
         playing = true;
-        Chord chrd = new Chord();
-        int[] weights = {50,25,17};
-        int nextChord = chrd.next(weights);
-        ukulelePlayer.playChords(nextChord);
     }
 
     public void stop() {
-        ukulelePlayer.release();
-        // drumPlayer.release();
         playing = false;
+//        ukulelePlayer.release();
     }
 
     public void toggle() throws InterruptedException {
