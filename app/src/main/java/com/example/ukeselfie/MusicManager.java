@@ -6,7 +6,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class MusicManager {
+import android.util.Log;
+
+public class MusicManager implements Runnable {
 
     private boolean playing;
 
@@ -16,14 +18,26 @@ public class MusicManager {
     private MusicPlayer ukulelePlayer;
     private MusicPlayer drumPlayer;
 
+    private Chord chordLogic;
+
     /**
      * Manage playback (mood, tempo, rhythm)
      * using `Chord` and keep time.
      */
     public MusicManager(AppCompatActivity context) {
-        playing = true;
+        chordLogic = new Chord();
+        playing = false;
         ukulelePlayer = new MusicPlayer(context, Sounds.CHORDS);
 //        drumPlayer = new MusicPlayer(context, drumList);
+    }
+
+    @Override
+    public void run() {
+        playing = true;
+        int[] weights = {50,25,17};
+        while (playing) {
+            ukulelePlayer.playChords(chordLogic.next(weights));
+        }
     }
 
     /// Generates a random chord (for testing purposes)
@@ -38,13 +52,11 @@ public class MusicManager {
 
     /// Starts keeping time
     public void start() throws InterruptedException {
-        while (playing) {
-            Chord chrd = new Chord();
-            int[] weights = {50,25,17};
-            int nextChord = chrd.next(weights);
-            ukulelePlayer.playChords(nextChord);
-            Thread.sleep(1000);
-        }
+        playing = true;
+        Chord chrd = new Chord();
+        int[] weights = {50,25,17};
+        int nextChord = chrd.next(weights);
+        ukulelePlayer.playChords(nextChord);
     }
 
     public void stop() {
@@ -53,15 +65,12 @@ public class MusicManager {
         playing = false;
     }
 
-    public void toggle() {
-        if (playing) {
+    public void toggle() throws InterruptedException {
+        Log.d("playing?", this.playing + "");
+        if (this.playing) {
             this.stop();
         } else {
-            try {
-                this.start();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+            this.start();
         }
     }
 

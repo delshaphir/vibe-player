@@ -15,6 +15,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
 
+import java.time.Clock;
+import java.time.Duration;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -24,7 +27,10 @@ import android.app.ActivityManager;
 
 public class MainActivity extends AppCompatActivity {
 
+    MusicManager manager;
     Button bt;
+    boolean playing = false;
+    Clock clock;
 
     private int[] rand4(){
         Random rand = new Random();
@@ -41,7 +47,6 @@ public class MainActivity extends AppCompatActivity {
         return ret;
     }
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,22 +54,27 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        final MusicManager manager = new MusicManager(this);
+        manager = new MusicManager(this);
 
         bt = (Button)findViewById(R.id.button);
 
-        bt.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view){
-                try {
-                    manager.start();
-                } catch (InterruptedException e) {
-                    Log.d("exception", e.getMessage());
+        bt.setOnClickListener(
+                new View.OnClickListener(){
+                  @Override
+                  public void onClick(View view) {
+                      new Thread(manager).start();
+                      /*
+                      try {
+                          manager.toggle();
+                      } catch (InterruptedException e) {
+                          Log.d("exception", e.getMessage());
+                      }
+                      */
+                  }
                 }
-            }
-        }
         );
 
+        /*
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,6 +83,7 @@ public class MainActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+         */
     }
 
     @Override
