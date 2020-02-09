@@ -2,6 +2,7 @@ package com.example.ukeselfie;
 
 import java.util.Random;
 
+
 /*
  * new object
  *  Chord ch = new Chord;
@@ -21,8 +22,6 @@ public class Chord {
     static final int[] COMPLEX = {-5, -5, 10};
 
     public int previous = 0;
-
-    private int[] streak = {0, 0, 0};
 
     //scale degrees of the sevenc chords of a major scale
     private int[][] notes = {
@@ -74,6 +73,7 @@ public class Chord {
 
         int nextChord = tendencies[previous][nextTendency];
 
+        previous = nextChord;
 
         return notes[nextChord];
 
