@@ -3,6 +3,7 @@ package com.example.ukeselfie;
 import java.util.Random;
 import android.media.MediaPlayer;
 import android.provider.MediaStore;
+import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
 import java.util.ArrayList;
@@ -36,6 +37,7 @@ public class MusicPlayer{
 
     public void playChords(int chordf){
         mediaPlayers.get(chordf).start();
+        Log.d("tag", String.valueOf(chordf));
     }
 
     public void release(){

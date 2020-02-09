@@ -58,11 +58,14 @@ public class MainActivity extends AppCompatActivity {
 
         bt = (Button)findViewById(R.id.button);
 
+        final Thread manThread = new Thread(manager);
+
         bt.setOnClickListener(
                 new View.OnClickListener(){
                   @Override
                   public void onClick(View view) {
-                      new Thread(manager).start();
+                      manThread.start();
+
                       /*
                       try {
                           manager.toggle();
